@@ -1,4 +1,4 @@
-gts_travel
+GTS CI
 ==========
 
-Aplikasi Travel Agent | GLOBAL TRANS SOLUTIONS
+Aplikasi Codeigniter Travel Agent | GLOBAL TRANS SOLUTIONS
