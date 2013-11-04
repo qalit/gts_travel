@@ -2,11 +2,11 @@
 
 <head>
     <meta http-equiv="Contect-Type" content="text/html; charset=UTF-8" />
-    <link rel="shurtcut icion" href="<?php echo base_url().'images/fav_icon.png';?>" />
+    <link rel="shortcut icon" href="<?php echo base_url().'images/fav_icon.png';?>" />
     <style type='text/css'>@import url("<?php echo base_url(). C_CSS. 'reset.css';?>")</style>
     <style type="text/css">@import url("<?php echo base_url(). C_CSS. 'login.css';?>")</style>
     <title>Login</title>
-    <script src="<?php echo base_url().C_JS. 'jquery-1.7.2.min.js';?>"></script>
+    <script src="<?php echo base_url().C_JS. 'jquery-2.0.3.min.js';?>"></script>
 </head>
 
 <body bgcolor="f3f3f3">
@@ -38,7 +38,7 @@
                         
                         ?>
                         <?php
-                        $message = $this->sessio->flashdata('message');
+                        $message = $this->session->flashdata('message');
                         echo $message == '' ? '' : '<p class="field_error">', '</p>';
                         ?>
                         
