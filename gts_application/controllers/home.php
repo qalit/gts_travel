@@ -7,12 +7,14 @@
 class Home extends CI_Controller {
 	
 	function __construct() { parent::__construct();}
-    public function index (){
-        $usersnip = $this->session->userdata('nip');
-        if (($usersnip == '') || (!isset ($usersnip))){
-            $this->load->view('view_login');
-        } else {
-            redirect('dashboard');
-        }
+    public function home (){
+        $breadcumb = array(
+        "Home" => "/home",
+        "city" => "/home/city",
+        "Aceh" => ""
+        );
+        $data['breadcumb'] = $breadcumb;
+        $this->load->view('home.php', $data);
     }
 }
+?>

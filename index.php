@@ -20,11 +20,11 @@
  */
     define('APP_NAME', "GTS TRAVEL ");
     define('TM_PREFIX', 'gts_');
-    define('MODULELOAD', TM_PREFIX.'xmodule/');
-    define('C_CSS', MODULELOAD.'css/');
-    define('C_JS', MODULELOAD.'js/');
-    define('C_IMAGES', MODULELOAD.'images/');
-    define('ADMIN_LAYOUT', "layout_dashbord/");
+    define('ASSET', TM_PREFIX.'asset/');
+    define('CSS', ASSET.'css/');
+    define('JS', ASSET.'js/');
+    define('IMAGES', ASSET.'images/');
+    define('ADMIN_LAYOUT', "admin_dashbord/");
     define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
@@ -206,6 +206,8 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+
+require_once BASEPATH.'core/Model'.EXT;
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */

@@ -20,9 +20,9 @@ class Dashboard extends CI_Controller {
     }
     public function index(){
         $data = array(
-            'mainview'=>'dashboard/view_dashboard'
-            ,'information_message'=>'SELAMAT DATANG DI HALAMAN ADMINISTRATOR'
-            ,'title'=>'DASHBOARD '.APP_NAME);
-        $this->parser->parse('layout_dashboard/maintemplate',$data);
+            'mainview'=>'dashboard/view_dashboard',
+            'information_message'=>'SELAMAT DATANG DI HALAMAN ADMINISTRATOR',
+            'title'=>'DASHBOARD '.APP_NAME);
+            $this->parser->parse('layout_dashboard/maintemplate',$data);
     }
 }
