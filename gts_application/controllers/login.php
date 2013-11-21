@@ -1,39 +1,56 @@
-<?php if(!defined ('BASEPATH')) exit ('No direct script allowed');
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * Login form
- */
-class Login extends CI_Controller {
+class Login extends CI_Controller{
 	
-	function __construct() {
-		parent::__construct();
-        $this->load->helper(array('form', 'url'));
-        $this->load->library('upload');
-        
+	function index(){
+		$data['main_content'] = 'com_login/login_form';
+		$this->load->view('template/index', $data);
 	}
-    
-    public function index(){
-        $this->load->view('view_login');
-        $this->load->view('home');
-    }
-    
-    public function proses_login(){
-        $username = $_REQUEST['username'];
-        $password = $_REQUEST['password'];
-        
-        $sqlquery = "call sp_GetUserByUsernameAndPassword (?,?)";
-        $result = $this->db->query($sqlquery, 
-        array(mysql_escape_string($username), mysql_escape_string($password)), TRUE) -> $result();
-        if (count($result) > 0 ){
-            $sessionDataUser = array();
-            foreach ($result as $row){
-                $sessionDataUser = array('username' => $row->username, 'nip' => $row->nip );
-            }
-            $this->session->set_userdata($sessionDataUser);
-            redirect('dashborad', 'refresh');
-            } else {
-                redirect('home', 'refresh');
-            }             
-               
-    }
+	
+	function validate_cred(){
+		$this->load->model('models_user');
+		$query = $this->models_user->validasi();
+		
+		if ($query){
+			$data = array(
+				'username' => $this->input->post('username'),
+				'is_logged_in' => True
+			);
+			$this->session->set_userdata($data);
+			redirect('site/member_area');
+		} else {
+			$this->index();
+		}
+	}
+	
+	function signup(){
+		$data['main_content'] = 'com_signup/signup_form';
+		$this->load->view('template/index', $data);
+	}
+	
+	function create_member(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('first_name', 'Nama Depan', 'trim|required');
+		$this->form_validation->set_rules('last_name', 'Nama Belakang', 'trim|requires');
+		$this->form_validation->set_rules('email_address', 'Email', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password Konfirmasi', 'trim|required');
+		
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('com_signup/signup_form');
+		} else {
+			$this->load->model('models_user');
+			if ($query = $this->models_user->buat_akun()){
+				$data['main_content'] = 'com_signup/signup_success';
+				$this->load->view('template/index', $data);
+			} else {
+	  			$this->load->view('com_signup/signup_form');
+			}
+		}
+	}
+	
+	function logout(){
+		$this->session->sess_destroy();
+		$this->index();
+	}
 }
